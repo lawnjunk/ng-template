@@ -1,0 +1,16 @@
+@import "theme";
+
+.home {
+  .panel-heading {
+    background-color: $app-primary;
+    span {
+      font-weight: bold;
+      color: $app-secondary;
+    }
+
+    span:hover {
+      color: $app-black;
+    }
+  }
+}
+
