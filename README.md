@@ -1,9 +1,4 @@
 ng template
 =======
-> starter scaffold for working with angular
+> codefellows-401-javascript starter scaffold for working with angular
 
-## features
-* webpack
-* sass
-* font-awesome
-* bootstrap-sass
