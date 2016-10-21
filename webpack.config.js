@@ -13,7 +13,7 @@ let plugins = [
   new HTMLPlugin({template: `${__dirname}/app/index.html`}),
   new webpack.DefinePlugin({
     __API_URL__: JSON.stringify(process.env.API_URL),
-    __DEBUG__: JSON.stringify(!!process.env.DEBUG),
+    __DEBUG__: JSON.stringify(!production),
   }),
 ];
 
