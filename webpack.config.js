@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').load();
 const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
@@ -8,11 +9,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const production = process.env.NODE_ENV === 'production';
 
 let plugins = [
-  new HTMLPlugin({template: `${__dirname}/app/entry.js`}),
   new ExtractTextPlugin('bundle.css'),
+  new HTMLPlugin({template: `${__dirname}/app/index.html`}),
   new webpack.DefinePlugin({
-    __API_URL__: JSON.stringify(process.env.API_URI),
-    __DEBUG__: JSON.stringify(!production),
+    __API_URL__: JSON.stringify(process.env.API_URL),
+    __DEBUG__: JSON.stringify(!!process.env.DEBUG),
   }),
 ];
 
@@ -29,19 +30,21 @@ if (production){
 }
 
 module.exports = {
-  plugins,
-  debug: !production,
   entry: `${__dirname}/app/entry.js`,
   devtool: production ? false : 'eval',
+  plugins,
   output: {
     path: 'build',
     filename: 'bundle.js',
   },
-  sassLoader: { includePaths: [`${__dirname}/app/scss/lib`] },
+  sassLoader: {
+    includePaths: [`${__dirname}/app/scss/lib`],
+  },
   module: {
     loaders: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel',
       },
       {
@@ -49,12 +52,16 @@ module.exports = {
         loader: 'html',
       },
       {
-        test: /\.(eot|ttf|woff)$/,
-        url: 'url?limit=10000&name=fonts/[name].[ext]',
+        test: /\.(woff|ttf|svg|eot).*/,
+        loader: 'url?limit=10000&name=font/[name].[ext]',
       },
       {
-        test: /\.(png|jpg|jpeg|tiff|bmp|gif)$/,
-        url: 'url?limit=10000&name=image/[hash].[ext]',
+        test: /\.(jpg|jpeg|bmp|tiff|gif|png)$/,
+        loader: 'url?limit=10000&name=image/[hash].[ext]',
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css!resolve-url!sass?sourceMap'),
       },
     ],
   },
