@@ -15,7 +15,7 @@
   },
   "globals": {
     "window": false,
-    "__API_URI__": false,
+    "__API_URL__": false,
     "__DEBUG__": false
   },
   "ecmaFeatures": {

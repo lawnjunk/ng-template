@@ -29,21 +29,23 @@ context.keys().forEach( path => {
 // load view controllers
 context = require.context('./view/', true, /.js$/);
 context.keys().forEach( key => {
-  let name = pascalcase(path.basename(key, '.js'));
-  demoApp.controller(name, context(key));
+  let name = pascalcase(path.basename(key, '.js')); // name controller based on file name
+  let module = context(key); // value of module.exports
+  demoApp.controller(name, module);
 });
 
 // load services 
 context = require.context('./service/', true, /.js$/);
 context.keys().forEach( key => {
   let name = camelcase(path.basename(key, '.js'));
-  demoApp.service(name, context(key));
+  let module = context(key); // value of module.exports
+  demoApp.service(name, module);
 });
 
 // load components 
 context = require.context('./component/', true, /.js$/);
 context.keys().forEach( key => {
   let name = camelcase(path.basename(key, '.js'));
-  console.log('loading component', name);
-  demoApp.component(name, context(key));
+  let module = context(key); // value of module.exports
+  demoApp.component(name, module);
 });
