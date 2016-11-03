@@ -18,34 +18,50 @@ const uiRouter = require('angular-ui-router');
 const uiBootstrap = require('angular-ui-bootstrap');
 
 // create angular module
-const demoApp = angular.module('demoApp', [ngTouch, ngAnimate, uiRouter, uiBootstrap]);
+const app = angular.module('demoApp', [ngTouch, ngAnimate, uiRouter, uiBootstrap]);
 
-// load config
+// load configuration
 let context = require.context('./config/', true, /.js$/);
 context.keys().forEach( path => {
-  demoApp.config(context(path));
-});
-
-// load view controllers
-context = require.context('./view/', true, /.js$/);
-context.keys().forEach( key => {
-  let name = pascalcase(path.basename(key, '.js')); // name controller based on file name
-  let module = context(key); // value of module.exports
-  demoApp.controller(name, module);
+  app.config(context(path));
 });
 
 // load services 
 context = require.context('./service/', true, /.js$/);
 context.keys().forEach( key => {
   let name = camelcase(path.basename(key, '.js'));
-  let module = context(key); // value of module.exports
-  demoApp.service(name, module);
+  let module = context(key); 
+  app.service(name, module);
+});
+
+// load view controllers
+context = require.context('./view/', true, /.js$/);
+context.keys().forEach( key => {
+  let name = pascalcase(path.basename(key, '.js')); 
+  let module = context(key); 
+  app.controller(name, module);
 });
 
 // load components 
 context = require.context('./component/', true, /.js$/);
 context.keys().forEach( key => {
   let name = camelcase(path.basename(key, '.js'));
-  let module = context(key); // value of module.exports
-  demoApp.component(name, module);
+  let module = context(key); 
+  app.component(name, module);
+});
+
+// load directives 
+context = require.context('./directive/', true, /.js$/);
+context.keys().forEach( key => {
+  let name = camelcase(path.basename(key, '.js'));
+  let module = context(key); 
+  app.directive(name, module);
+});
+
+// load filters
+context = require.context('./filter/', true, /.js$/);
+context.keys().forEach( key => {
+  let name = camelcase(path.basename(key, '.js'));
+  let module = context(key); 
+  app.filter(name, module);
 });
