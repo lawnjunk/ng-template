@@ -13,10 +13,11 @@ cd  <new-project-name>
 ```
 * Create a **.env** file in your repository 
  * this file will **not** be tracked by git
+ * requires `NODE_ENV`, `TITLE`, and `API_URL`
 ``` .env
 NODE_ENV="dev"
 TITLE="Photo Gallery"
-API_URL="http://localhost/3000
+API_URL="http://localhost/3000"
 ```
 * Install dependencies
 ``` bash
