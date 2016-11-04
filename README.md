@@ -15,6 +15,7 @@ cd  <new-project-name>
  * this file will **not** be tracked by git
  * requires `NODE_ENV`, `TITLE`, and `API_URL`
 ``` .env
+# example .env file
 NODE_ENV="dev"
 TITLE="Photo Gallery"
 API_URL="http://localhost/3000"
