@@ -18,7 +18,12 @@ const uiRouter = require('angular-ui-router');
 const uiBootstrap = require('angular-ui-bootstrap');
 
 // create angular module
-const app = angular.module('demoApp', [ngTouch, ngAnimate, uiRouter, uiBootstrap]);
+const app = angular.module(camelcase(__TITLE__), [ngTouch, ngAnimate, uiRouter, uiBootstrap]);
+
+// set up $rootScope globals
+app.run(['$rootScope', function($rootScope){
+  $rootScope.title = __TITLE__;
+}]);
 
 // load configuration
 let context = require.context('./config/', true, /.js$/);
@@ -65,3 +70,7 @@ context.keys().forEach( key => {
   let module = context(key); 
   app.filter(name, module);
 });
+
+// after everything is loaded in to the app 
+// load bootstrap onto the page
+angular.bootstrap(document, [camelcase(__TITLE__)]);

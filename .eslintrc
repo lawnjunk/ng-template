@@ -10,18 +10,19 @@
   "env": {
     "es6": true,
     "node": true,
-    "mocha": true,
     "jasmine": true
   },
   "globals": {
-    "window": false,
-    "__API_URL__": false,
-    "__DEBUG__": false
+    "angular": true,
+    "document": false,
+    "__DEBUG__": false,
+    "__TITLE__": false,
+    "__API_URL__": false
   },
   "ecmaFeatures": {
     "modules": true,
-    "experimentalObjectRestSpread": true,
-    "impliedStrict": true
+    "impliedStrict": true,
+    "experimentalObjectRestSpread": true
   },
   "extends": "eslint:recommended"
 }
