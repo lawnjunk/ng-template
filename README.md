@@ -14,7 +14,7 @@ cd  <new-project-name>
 * Create a **.env** file in your repository 
  * this file will **not** be tracked by git
  * requires `NODE_ENV`, `TITLE`, and `API_URL`
-``` .env
+``` bash
 # example .env file
 NODE_ENV="dev"
 TITLE="Photo Gallery"
